@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
 
-#first version
-
 #require 'rubygems'
 require 'occi-api'
 #require 'pp'

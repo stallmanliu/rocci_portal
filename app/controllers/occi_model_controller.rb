@@ -1,6 +1,9 @@
 # Controller class handling all model-related requests.
 # Implements listing of resources, retrieval of the model
 # and creation/deletion of mixins.
+
+#first version
+
 require 'rubygems'
 require 'occi-api'
 

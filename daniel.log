@@ -1,0 +1,180 @@
+15:52:33:645 [daniel] lib/request_parsers/occi_parser.rb:18, RequestParsers::OcciParser.initialize(app), app: #<Hooks::DummyHook:0x00000001dafb28 @app=#<ActionDispatch::Routing::RouteSet:0x00000001e01ba8>, @options=#<Hashie::Mash>>
+15:52:34:525 [daniel] lib/request_parsers/occi_parser.rb:37, RequestParsers::OcciParser.call(env), before @app.call(env): 
+15:57:07:424 [daniel] lib/request_parsers/occi_parser.rb:18, RequestParsers::OcciParser.initialize(app), app: #<Hooks::DummyHook:0x00000002711248 @app=#<ActionDispatch::Routing::RouteSet:0x00000001e5d980>, @options=#<Hashie::Mash>>
+15:57:09:049 [daniel] lib/request_parsers/occi_parser.rb:37, RequestParsers::OcciParser.call(env), before @app.call(env): 
+16:06:24:665 [daniel] lib/hooks/dummy_hook.rb:5, Hooks::DummyHook.initialize(app, options), app: #<ActionDispatch::Routing::RouteSet:0x000000022c3420>, options: #<Hashie::Mash>. 
+16:06:24:665 [daniel] lib/request_parsers/occi_parser.rb:18, RequestParsers::OcciParser.initialize(app), app: #<Hooks::DummyHook:0x00000002618b20 @app=#<ActionDispatch::Routing::RouteSet:0x000000022c3420>, @options=#<Hashie::Mash>>
+16:06:25:512 [daniel] lib/request_parsers/occi_parser.rb:37, RequestParsers::OcciParser.call(env), before @app.call(env): 
+16:33:33:622 [daniel] lib/hooks/dummy_hook.rb:5, Hooks::DummyHook.initialize(app, options), app: #<ActionDispatch::Routing::RouteSet:0x00000002a4bff8>, options: #<Hashie::Mash>. 
+16:33:33:622 [daniel] lib/request_parsers/occi_parser.rb:18, RequestParsers::OcciParser.initialize(app), app: #<Hooks::DummyHook:0x00000002d86740 @app=#<ActionDispatch::Routing::RouteSet:0x00000002a4bff8>, @options=#<Hashie::Mash>>
+16:33:34:115 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"cors", :action=>"index"}. 
+16:33:34:115 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"cors", :action=>"index"}. 
+16:33:34:116 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"occi_model", :action=>"show"}. 
+16:33:34:117 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"occi_model", :action=>"show"}. 
+16:33:34:118 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"occi_model", :action=>"create"}. 
+16:33:34:118 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"occi_model", :action=>"create"}. 
+16:33:34:119 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"occi_model", :action=>"delete"}. 
+16:33:34:119 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"occi_model", :action=>"delete"}. 
+16:33:34:120 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"compute", :action=>"show"}. 
+16:33:34:120 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"compute", :action=>"index"}. 
+16:33:34:121 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"compute", :action=>"trigger"}. 
+16:33:34:121 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"compute", :action=>"partial_update"}. 
+16:33:34:122 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"compute", :action=>"trigger"}. 
+16:33:34:122 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"compute", :action=>"create"}. 
+16:33:34:123 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"compute", :action=>"update"}. 
+16:33:34:123 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"compute", :action=>"delete"}. 
+16:33:34:124 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"compute", :action=>"delete"}. 
+16:33:34:124 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"network", :action=>"show"}. 
+16:33:34:125 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"network", :action=>"index"}. 
+16:33:34:126 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"network", :action=>"trigger"}. 
+16:33:34:127 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"network", :action=>"partial_update"}. 
+16:33:34:127 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"network", :action=>"trigger"}. 
+16:33:34:128 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"network", :action=>"create"}. 
+16:33:34:128 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"network", :action=>"update"}. 
+16:33:34:129 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"network", :action=>"delete"}. 
+16:33:34:129 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"network", :action=>"delete"}. 
+16:33:34:130 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storage", :action=>"show"}. 
+16:33:34:130 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storage", :action=>"index"}. 
+16:33:34:131 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storage", :action=>"trigger"}. 
+16:33:34:131 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storage", :action=>"partial_update"}. 
+16:33:34:132 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storage", :action=>"trigger"}. 
+16:33:34:132 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storage", :action=>"create"}. 
+16:33:34:133 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storage", :action=>"update"}. 
+16:33:34:133 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storage", :action=>"delete"}. 
+16:33:34:134 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storage", :action=>"delete"}. 
+16:33:34:134 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"networkinterface", :action=>"show"}. 
+16:33:34:135 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"networkinterface", :action=>"create"}. 
+16:33:34:135 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"networkinterface", :action=>"delete"}. 
+16:33:34:136 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storagelink", :action=>"show"}. 
+16:33:34:137 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storagelink", :action=>"create"}. 
+16:33:34:138 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storagelink", :action=>"delete"}. 
+16:33:34:143 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"os_tpl", :action=>"index"}. 
+16:33:34:143 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"os_tpl", :action=>"trigger"}. 
+16:33:34:144 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"resource_tpl", :action=>"index"}. 
+16:33:34:145 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"resource_tpl", :action=>"trigger"}. 
+16:33:34:145 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"mixin", :action=>"index"}. 
+16:33:34:146 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"mixin", :action=>"trigger"}. 
+16:33:34:146 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"mixin", :action=>"assign"}. 
+16:33:34:147 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"mixin", :action=>"update"}. 
+16:33:34:147 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"mixin", :action=>"delete"}. 
+16:33:34:149 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"occi_model", :action=>"index"}. 
+16:33:34:797 [daniel] lib/request_parsers/occi_parser.rb:37, RequestParsers::OcciParser.call(env), before @app.call(env): 
+16:33:34:810 [daniel]route_set.rb:49, RouteSet::Dispatcher.serve(req), controller: OcciModelController. 
+16:33:34:810 [daniel]route_set.rb, RouteSet::Dispatcher.dispatch(controller,action), controller: OcciModelController, action: "show". 
+16:53:53:553 [daniel] lib/hooks/dummy_hook.rb:5, Hooks::DummyHook.initialize(app, options), app: #<ActionDispatch::Routing::RouteSet:0x000000025a8230>, options: #<Hashie::Mash>. 
+16:53:53:553 [daniel] lib/request_parsers/occi_parser.rb:18, RequestParsers::OcciParser.initialize(app), app: #<Hooks::DummyHook:0x00000002979fd0 @app=#<ActionDispatch::Routing::RouteSet:0x000000025a8230>, @options=#<Hashie::Mash>>
+16:53:54:009 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"cors", :action=>"index"}. 
+16:53:54:009 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"cors", :action=>"index"}. 
+16:53:54:010 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"occi_model", :action=>"show"}. 
+16:53:54:010 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"occi_model", :action=>"show"}. 
+16:53:54:011 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"occi_model", :action=>"create"}. 
+16:53:54:011 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"occi_model", :action=>"create"}. 
+16:53:54:012 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"occi_model", :action=>"delete"}. 
+16:53:54:012 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"occi_model", :action=>"delete"}. 
+16:53:54:013 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"compute", :action=>"show"}. 
+16:53:54:013 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"compute", :action=>"index"}. 
+16:53:54:014 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"compute", :action=>"trigger"}. 
+16:53:54:014 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"compute", :action=>"partial_update"}. 
+16:53:54:015 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"compute", :action=>"trigger"}. 
+16:53:54:015 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"compute", :action=>"create"}. 
+16:53:54:016 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"compute", :action=>"update"}. 
+16:53:54:016 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"compute", :action=>"delete"}. 
+16:53:54:017 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"compute", :action=>"delete"}. 
+16:53:54:018 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"network", :action=>"show"}. 
+16:53:54:018 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"network", :action=>"index"}. 
+16:53:54:019 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"network", :action=>"trigger"}. 
+16:53:54:019 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"network", :action=>"partial_update"}. 
+16:53:54:020 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"network", :action=>"trigger"}. 
+16:53:54:020 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"network", :action=>"create"}. 
+16:53:54:020 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"network", :action=>"update"}. 
+16:53:54:021 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"network", :action=>"delete"}. 
+16:53:54:022 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"network", :action=>"delete"}. 
+16:53:54:022 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storage", :action=>"show"}. 
+16:53:54:023 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storage", :action=>"index"}. 
+16:53:54:023 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storage", :action=>"trigger"}. 
+16:53:54:024 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storage", :action=>"partial_update"}. 
+16:53:54:024 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storage", :action=>"trigger"}. 
+16:53:54:025 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storage", :action=>"create"}. 
+16:53:54:025 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storage", :action=>"update"}. 
+16:53:54:026 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storage", :action=>"delete"}. 
+16:53:54:026 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storage", :action=>"delete"}. 
+16:53:54:027 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"networkinterface", :action=>"show"}. 
+16:53:54:027 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"networkinterface", :action=>"create"}. 
+16:53:54:028 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"networkinterface", :action=>"delete"}. 
+16:53:54:028 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storagelink", :action=>"show"}. 
+16:53:54:029 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storagelink", :action=>"create"}. 
+16:53:54:030 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storagelink", :action=>"delete"}. 
+16:53:54:030 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"os_tpl", :action=>"index"}. 
+16:53:54:031 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"os_tpl", :action=>"trigger"}. 
+16:53:54:032 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"resource_tpl", :action=>"index"}. 
+16:53:54:032 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"resource_tpl", :action=>"trigger"}. 
+16:53:54:033 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"mixin", :action=>"index"}. 
+16:53:54:033 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"mixin", :action=>"trigger"}. 
+16:53:54:034 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"mixin", :action=>"assign"}. 
+16:53:54:034 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"mixin", :action=>"update"}. 
+16:53:54:035 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"mixin", :action=>"delete"}. 
+16:53:54:035 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"occi_model", :action=>"index"}. 
+16:53:54:373 [daniel] lib/request_parsers/occi_parser.rb:37, RequestParsers::OcciParser.call(env), before @app.call(env): 
+16:53:54:382 [daniel]route_set.rb:49, RouteSet::Dispatcher.serve(req), controller: OcciModelController. 
+16:53:54:382 [daniel]route_set.rb, RouteSet::Dispatcher.dispatch(controller,action), controller: OcciModelController, action: "show". 
+16:53:54:387 [daniel] occi_model_controller.rb, OcciModelController.show(), enter: 
+16:54:22:637 [daniel] occi_model_controller.rb, OcciModelController.show(), leave: 
+17:01:54:584 [daniel] lib/hooks/dummy_hook.rb:5, Hooks::DummyHook.initialize(app, options), app: #<ActionDispatch::Routing::RouteSet:0x00000002d99f98>, options: #<Hashie::Mash>. 
+17:01:54:584 [daniel] lib/request_parsers/occi_parser.rb:18, RequestParsers::OcciParser.initialize(app), app: #<Hooks::DummyHook:0x000000034b1010 @app=#<ActionDispatch::Routing::RouteSet:0x00000002d99f98>, @options=#<Hashie::Mash>>
+17:01:55:090 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"cors", :action=>"index"}. 
+17:01:55:091 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"cors", :action=>"index"}. 
+17:01:55:092 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"occi_model", :action=>"show"}. 
+17:01:55:093 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"occi_model", :action=>"show"}. 
+17:01:55:093 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"occi_model", :action=>"create"}. 
+17:01:55:094 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"occi_model", :action=>"create"}. 
+17:01:55:094 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"occi_model", :action=>"delete"}. 
+17:01:55:095 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"occi_model", :action=>"delete"}. 
+17:01:55:095 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"compute", :action=>"show"}. 
+17:01:55:096 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"compute", :action=>"index"}. 
+17:01:55:096 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"compute", :action=>"trigger"}. 
+17:01:55:097 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"compute", :action=>"partial_update"}. 
+17:01:55:097 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"compute", :action=>"trigger"}. 
+17:01:55:098 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"compute", :action=>"create"}. 
+17:01:55:098 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"compute", :action=>"update"}. 
+17:01:55:099 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"compute", :action=>"delete"}. 
+17:01:55:099 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"compute", :action=>"delete"}. 
+17:01:55:100 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"network", :action=>"show"}. 
+17:01:55:101 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"network", :action=>"index"}. 
+17:01:55:101 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"network", :action=>"trigger"}. 
+17:01:55:102 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"network", :action=>"partial_update"}. 
+17:01:55:102 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"network", :action=>"trigger"}. 
+17:01:55:103 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"network", :action=>"create"}. 
+17:01:55:103 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"network", :action=>"update"}. 
+17:01:55:104 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"network", :action=>"delete"}. 
+17:01:55:105 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"network", :action=>"delete"}. 
+17:01:55:105 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storage", :action=>"show"}. 
+17:01:55:106 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storage", :action=>"index"}. 
+17:01:55:107 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storage", :action=>"trigger"}. 
+17:01:55:107 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storage", :action=>"partial_update"}. 
+17:01:55:108 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storage", :action=>"trigger"}. 
+17:01:55:109 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storage", :action=>"create"}. 
+17:01:55:109 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storage", :action=>"update"}. 
+17:01:55:110 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storage", :action=>"delete"}. 
+17:01:55:110 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storage", :action=>"delete"}. 
+17:01:55:111 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"networkinterface", :action=>"show"}. 
+17:01:55:112 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"networkinterface", :action=>"create"}. 
+17:01:55:112 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"networkinterface", :action=>"delete"}. 
+17:01:55:113 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storagelink", :action=>"show"}. 
+17:01:55:113 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storagelink", :action=>"create"}. 
+17:01:55:114 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"storagelink", :action=>"delete"}. 
+17:01:55:115 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"os_tpl", :action=>"index"}. 
+17:01:55:116 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"os_tpl", :action=>"trigger"}. 
+17:01:55:116 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"resource_tpl", :action=>"index"}. 
+17:01:55:118 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"resource_tpl", :action=>"trigger"}. 
+17:01:55:118 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"mixin", :action=>"index"}. 
+17:01:55:119 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"mixin", :action=>"trigger"}. 
+17:01:55:119 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"mixin", :action=>"assign"}. 
+17:01:55:120 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"mixin", :action=>"update"}. 
+17:01:55:121 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"mixin", :action=>"delete"}. 
+17:01:55:121 [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: {:controller=>"occi_model", :action=>"index"}. 
+17:01:55:852 [daniel] lib/request_parsers/occi_parser.rb:37, RequestParsers::OcciParser.call(env), before @app.call(env): 
+17:01:55:901 [daniel]route_set.rb:49, RouteSet::Dispatcher.serve(req), controller: OcciModelController. 
+17:01:55:901 [daniel]route_set.rb, RouteSet::Dispatcher.dispatch(controller,action), controller: OcciModelController, action: "show". 
+17:01:55:915 [daniel] application_controller.rb, ApplicationController.authenticate!, skip. 
+17:01:55:915 [daniel] occi_model_controller.rb, OcciModelController.show(), enter: 
+17:02:12:708 [daniel] occi_model_controller.rb, OcciModelController.show(), leave: 

@@ -317,15 +317,39 @@ def test_one()
   
   puts "\n\nListing one_client:"
   prep_conn( "one" )
-=begin
-  @one_client.list( "http://schemas.ogf.org/occi/infrastructure#storage" ).each do |type|
+  @one_client.get_mixin_type_identifiers()
+#=begin
+  #@one_client.list( "http://schemas.ogf.org/occi/infrastructure#os_tpl" ).each do |type|
+  @one_client.get_mixin_type_identifiers().each do |type|
     puts type.inspect
     puts "\n#{type}"
   end
-=end
+#=end
   
   #puts @one_client.list_mixin( "uuid_lab_occi_one_vm_template_p23_25" )
-  puts @one_client.get( "https://172.90.0.10:11443/storage/15" ).inspect
+  #puts @one_client.get( "https://172.90.0.10:11443/storage/15" ).inspect
+  
+  #startaction = Occi::Core::Action.new scheme='http://schemas.ogf.org/occi/infrastructure/compute/action#', term='start', title='start compute instance'
+  #startactioninstance = Occi::Core::ActionInstance.new startaction, nil
+  #stopaction = Occi::Core::Action.new scheme='http://schemas.ogf.org/occi/infrastructure/compute/action#', term='stop', title='stop compute instance'
+  #stopactioninstance = Occi::Core::ActionInstance.new stopaction, nil
+  #
+  #backupaction = Occi::Core::Action.new scheme='http://schemas.ogf.org/occi/infrastructure/storage/action#', term='backup', title='backup storage'
+  #backupactioninstance = Occi::Core::ActionInstance.new backupaction, nil
+  
+
+
+  #http://schemas.ogf.org/occi/infrastructure/storage/action#backup
+  
+  #puts @one_client.trigger( "https://172.90.0.10:11443/compute/59", stopactioninstance ).inspect
+  #puts @one_client.trigger( "https://172.90.0.10:11443/compute/59", startactioninstance ).inspect
+  #puts @one_client.trigger( "https://172.90.0.10:11443/storage/1", backupactioninstance ).inspect
+
+  #puts @one_client.trigger( "https://172.90.0.10:11443/storage/1", backupactioninstance ).inspect
+  
+  #puts @one_client.delete( "https://172.90.0.10:11443/storage/36" ).inspect
+  
+  http://occi.172.90.0.10/occi/infrastructure/os_tpl#uuid_lab_occi_one_vm_template_p0_2
   
 end
 

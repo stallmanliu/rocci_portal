@@ -25,7 +25,7 @@ module ActionDispatch
 
       class Dispatcher < Routing::Endpoint
         def initialize(defaults)
-	  t = Time.now
+	        t = Time.now
           File.open("/opt/rOCCI-server/daniel.log", "a+") { |f| f.puts t.strftime("%H:%M:%S:%L") + " [daniel]route_set.rb:29, RouteSet::Dispatcher.initialize(defaults), defaults: " + defaults.inspect + ". " }
       
           @defaults = defaults
@@ -46,7 +46,7 @@ module ActionDispatch
           end
 	  
           t = Time.now
-          File.open("/opt/rOCCI-server/daniel.log", "a+") { |f| f.puts t.strftime("%H:%M:%S:%L") + " [daniel]route_set.rb:49, RouteSet::Dispatcher.serve(req), controller: " + controller.inspect + ". " }
+          File.open("/opt/rOCCI-server/daniel.log", "a+") { |f| f.puts t.strftime("%H:%M:%S:%L") + " [daniel]route_set.rb:49, RouteSet::Dispatcher.serve(req), controller: " + controller.inspect + ", params:" + params.inspect + ". " }
       
           dispatch(controller, params[:action], req.env)
         end
@@ -79,7 +79,7 @@ module ActionDispatch
         end
 
         def dispatch(controller, action, env)
-	  t = Time.now
+	        t = Time.now
           File.open("/opt/rOCCI-server/daniel.log", "a+") { |f| f.puts t.strftime("%H:%M:%S:%L") + " [daniel]route_set.rb, RouteSet::Dispatcher.dispatch(controller,action), controller: " + controller.inspect + ", action: " + action.inspect + ". " }
       
           controller.action(action).call(env)

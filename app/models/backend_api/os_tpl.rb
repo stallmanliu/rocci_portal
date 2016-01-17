@@ -30,5 +30,15 @@ module BackendApi
       os_tpl.location = "/mixin/os_tpl/#{os_tpl.term}/" if os_tpl
       os_tpl
     end
+    
+
+    def os_tpl_trigger_action(os_tpl_id, action_instance)
+      fail Errors::ArgumentError, '\'os_tpl_id\' is a mandatory argument' if storage_id.blank?
+      fail Errors::ArgumentError, '\'action_instance\' is a mandatory argument' if action_instance.blank?
+      fail Errors::ArgumentTypeMismatchError, 'Action requires an action instance!' unless action_instance.kind_of? Occi::Core::ActionInstance
+      @backend_instance.os_tpl_trigger_action(os_tpl_id, deep_clone(action_instance))
+    end
+    
+    
   end
 end

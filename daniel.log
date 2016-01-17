@@ -178,3 +178,198 @@
 17:01:55:915 [daniel] application_controller.rb, ApplicationController.authenticate!, skip. 
 17:01:55:915 [daniel] occi_model_controller.rb, OcciModelController.show(), enter: 
 17:02:12:708 [daniel] occi_model_controller.rb, OcciModelController.show(), leave: 
+00:42:01:298 [daniel] client_http.rb:trigger(), go to exe post(), path:"/mixin/os_tpl/uuid_lab_occi_one_vm_template_p0_2?action=backup", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/os_tpl/action#backup",
+  "attributes": {
+  }
+}
+01:01:51:444 [daniel] client_http.rb:trigger(), go to exe post(), path:"/compute/59?action=start", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/compute/action#start",
+  "attributes": {
+  }
+}
+01:01:54:985 [daniel] client_http.rb:trigger(), go to exe post(), path:"/mixin/os_tpl/uuid_lab_occi_one_vm_template_p0_2?action=backup", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/os_tpl/action#backup",
+  "attributes": {
+  }
+}
+01:06:13:952 [daniel] client_http.rb:trigger(), go to exe post(), path:"/mixin/os_tpl/2?action=backup", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/os_tpl/action#backup",
+  "attributes": {
+  }
+}
+01:10:20:176 [daniel] client_http.rb:trigger(), go to exe post(), path:"/mixin/os_tpl/2?action=backup", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/os_tpl/action#backup",
+  "attributes": {
+  }
+}
+01:32:58:587 [daniel] client_http.rb:trigger(), go to exe post(), path:"/mixin/os_tpl/2?action=backup", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/os_tpl/action#backup",
+  "attributes": {
+  }
+}
+01:35:05:124 [daniel] client_http.rb:trigger(), go to exe post(), path:"/mixin/os_tpl/2?action=backup", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/os_tpl/action#backup",
+  "attributes": {
+  }
+}
+02:30:08:762 [daniel] client_http.rb:trigger(), go to exe post(), path:"/mixin/os_tpl/2?action=backup", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/os_tpl/action#backup",
+  "attributes": {
+  }
+}
+02:32:56:364 [daniel] client_http.rb:trigger(), go to exe post(), path:"/mixin/os_tpl/2?action=backup", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/os_tpl/action#backup",
+  "attributes": {
+  }
+}
+02:38:37:296 [daniel] client_http.rb:trigger(), go to exe post(), path:"/mixin/os_tpl/2?action=backup", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/os_tpl/action#backup",
+  "attributes": {
+  }
+}
+02:57:34:402 [daniel] client_http.rb:trigger(), go to exe post(), path:"/mixin/os_tpl/2?action=backup", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/os_tpl/action#backup",
+  "attributes": {
+  }
+}
+03:10:11:182 [daniel] client_http.rb:trigger(), go to exe post(), path:"/mixin/os_tpl/2?action=backup", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/os_tpl/action#backup",
+  "attributes": {
+  }
+}
+03:18:20:199 [daniel] client_http.rb:trigger(), go to exe post(), path:"/mixin/os_tpl/2?action=backup", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/os_tpl/action#backup",
+  "attributes": {
+  }
+}
+03:23:32:593 [daniel] client_http.rb:trigger(), go to exe post(), path:"/mixin/os_tpl/2?action=backup", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/os_tpl/action#backup",
+  "attributes": {
+  }
+}
+03:33:59:564 [daniel] client_http.rb:trigger(), go to exe post(), path:"/mixin/os_tpl/2?action=backup", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/os_tpl/action#backup",
+  "attributes": {
+  }
+}
+03:56:27:278 [daniel] client_http.rb:trigger(), go to exe post(), path:"/mixin/os_tpl/2?action=backup", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/os_tpl/action#backup",
+  "attributes": {
+  }
+}
+03:59:36:122 [daniel] client_http.rb:trigger(), go to exe post(), path:"/mixin/os_tpl/2?action=backup", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/os_tpl/action#backup",
+  "attributes": {
+  }
+}
+04:03:33:139 [daniel] client_http.rb:trigger(), go to exe post(), path:"/mixin/os_tpl/2?action=backup", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/os_tpl/action#backup",
+  "attributes": {
+  }
+}
+04:25:11:754 [daniel] client_http.rb:trigger(), go to exe post(), path:"/mixin/os_tpl/2?action=backup", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/os_tpl/action#backup",
+  "attributes": {
+  }
+}
+04:38:36:677 [daniel] client_http.rb:trigger(), go to exe post(), path:"/mixin/os_tpl/2?action=backup", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/os_tpl/action#backup",
+  "attributes": {
+  }
+}
+04:50:54:948 [daniel] client_http.rb:trigger(), go to exe post(), path:"/mixin/os_tpl/2?action=backup", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/os_tpl/action#backup",
+  "attributes": {
+  }
+}
+05:05:53:849 [daniel] client_http.rb:trigger(), go to exe post(), path:"/compute/59?action=start", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/compute/action#start",
+  "attributes": {
+  }
+}
+05:07:11:541 [daniel] client_http.rb:trigger(), go to exe post(), path:"/compute/59?action=start", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/compute/action#start",
+  "attributes": {
+  }
+}
+05:07:40:454 [daniel] client_http.rb:trigger(), go to exe post(), path:"/compute/59?action=start", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/compute/action#start",
+  "attributes": {
+  }
+}
+12:41:46:868 [daniel] client_http.rb:trigger(), go to exe post(), path:"/compute/59?action=start", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/compute/action#start",
+  "attributes": {
+  }
+}
+16:49:45:961 [daniel] client_http.rb:trigger(), go to exe post(), path:"/compute/59?action=start", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/compute/action#start",
+  "attributes": {
+  }
+}
+17:09:48:161 [daniel] client_http.rb:trigger(), go to exe post(), path:"/compute/59?action=stop", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/compute/action#stop",
+  "attributes": {
+  }
+}
+17:16:26:253 [daniel] client_http.rb:trigger(), go to exe post(), path:"/compute/59?action=stop", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/compute/action#stop",
+  "attributes": {
+  }
+}
+17:21:57:624 [daniel] client_http.rb:trigger(), go to exe post(), path:"/compute/59?action=stop", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/compute/action#stop",
+  "attributes": {
+  }
+}
+17:25:29:729 [daniel] client_http.rb:trigger(), go to exe post(), path:"/compute/59?action=stop", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/compute/action#stop",
+  "attributes": {
+  }
+}
+17:31:44:801 [daniel] client_http.rb:trigger(), go to exe post(), path:"/compute/59?action=stop", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/compute/action#stop",
+  "attributes": {
+  }
+}
+17:32:59:219 [daniel] client_http.rb:trigger(), go to exe post(), path:"/mixin/os_tpl/2?action=backup", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/os_tpl/action#backup",
+  "attributes": {
+  }
+}
+17:48:09:577 [daniel] client_http.rb:trigger(), go to exe post(), path:"/mixin/os_tpl/2?action=backup", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/os_tpl/action#backup",
+  "attributes": {
+  }
+}
+17:54:13:001 [daniel] client_http.rb:trigger(), go to exe post(), path:"/mixin/os_tpl/2?action=backup", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/os_tpl/action#backup",
+  "attributes": {
+  }
+}
+18:06:53:002 [daniel] client_http.rb:trigger(), go to exe post(), path:"/compute/59?action=start", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/compute/action#start",
+  "attributes": {
+  }
+}
+18:56:41:729 [daniel] client_http.rb:trigger(), go to exe post(), path:"/mixin/os_tpl/2?action=backup", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/os_tpl/action#backup",
+  "attributes": {
+  }
+}
+19:47:32:731 [daniel] client_http.rb:trigger(), go to exe post(), path:"/mixin/os_tpl/2?action=backup", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/os_tpl/action#backup",
+  "attributes": {
+  }
+}
+19:52:27:431 [daniel] client_http.rb:trigger(), go to exe post(), path:"/mixin/os_tpl/2?action=backup", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/os_tpl/action#backup",
+  "attributes": {
+  }
+}
+20:40:33:971 [daniel] client_http.rb:trigger(), go to exe post(), path:"/mixin/os_tpl/2?action=backup", collection:{
+  "action": "http://schemas.ogf.org/occi/infrastructure/os_tpl/action#backup",
+  "attributes": {
+  }
+}

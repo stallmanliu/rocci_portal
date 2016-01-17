@@ -170,6 +170,9 @@ module Occi::Api::Client
       collection << action_instance
 
       # make the request
+      t = Time.now
+      File.open("/opt/rOCCI-server/daniel.log", "a+") { |f| f.puts t.strftime("%H:%M:%S:%L") + " [daniel] client_http.rb:trigger(), go to exe post(), path:" + path.inspect + ", collection:" + collection.inspect }
+    
       post path, collection
     end
 

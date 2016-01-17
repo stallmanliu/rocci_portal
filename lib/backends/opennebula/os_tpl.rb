@@ -45,6 +45,37 @@ module Backends
         # TODO: make it more efficient!
         os_tpl_list.to_a.select { |m| m.term == term }.first
       end
+      
+
+      def os_tpl_trigger_action(os_tpl_id, action_instance)
+        
+=begin
+        case action_instance.action.type_identifier
+        when 'http://schemas.ogf.org/occi/infrastructure/storage/action#online'
+          storage_trigger_action_online(storage_id, action_instance.attributes)
+        when 'http://schemas.ogf.org/occi/infrastructure/storage/action#offline'
+          storage_trigger_action_offline(storage_id, action_instance.attributes)
+        when 'http://schemas.ogf.org/occi/infrastructure/storage/action#backup'
+          storage_trigger_action_backup(storage_id, action_instance.attributes)
+        else
+          fail Backends::Errors::ActionNotImplementedError,
+               "Action #{action_instance.action.type_identifier.inspect} is not implemented!"
+        end
+
+=end
+        
+        os_tpl = ::OpenNebula::Template.new( ::OpenNebula::Template.build_xml(os_tpl_id), @client )
+        rc = os_tpl.info
+        check_retval(rc, Backends::Errors::ResourceRetrievalError)
+        
+        #clone action
+        rc = os_tpl.clone( "#{backend_object['NAME']}-#{DateTime.now.to_s.gsub(':', '_')}" )
+        check_retval(rc, Backends::Errors::ResourceActionError)
+        
+        true
+        
+      end
+      
 
       private
 

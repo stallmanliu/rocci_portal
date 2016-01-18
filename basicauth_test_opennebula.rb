@@ -353,23 +353,118 @@ def test_one()
   
   #http://occi.172.90.0.10/occi/infrastructure/os_tpl#uuid_lab_occi_one_vm_template_p0_2
   
-  backupaction = Occi::Core::Action.new scheme='http://schemas.ogf.org/occi/infrastructure/os_tpl/action#', term='backup', title='backup os_tpl'
+  backupaction = Occi::Core::Action.new scheme='http://schemas.ogf.org/occi/infrastructure/os_tpl/action#', term='clone', title='clone os_tpl'
   backupactioninstance = Occi::Core::ActionInstance.new backupaction, nil
   
-  puts @one_client.trigger( "https://172.90.0.10:11443/mixin/os_tpl/2", backupactioninstance ).inspect
+  #puts @one_client.trigger( "https://172.90.0.10:11443/mixin/os_tpl/2", backupactioninstance ).inspect
+  puts @one_client.trigger( "/mixin/os_tpl/2", backupactioninstance ).inspect
   
   
 end
+
+def get_latest_storage_id
+  prep_conn( "one" )
+  latest_id = @one_client.list( "storage" ).last.split("/").last.to_i
+end
+
+def get_latest_os_tpl_id
+  prep_conn( "one" )
+  latest_id = @one_client.list( "/mixin/os_tpl" ).last.split("/").last.to_i
+  #puts @one_client.list( "/mixin/os_tpl" ).inspect
+end
+
+def clone_images_os_tpls
+  
+  source_img = "/storage/9"
+  source_os_tpl = "/mixin/os_tpl/2"
+  
+  #s_new_id = get_latest_storage_id + 1
+  #os_new_id = get_latest_os_tpl_id + 1
+  
+  for idx in 0..2 do
+    puts "idx:" + idx.inspect
+    #clone image /storage/9:ubuntu-occi-hd-4G-p
+    s_backupaction = Occi::Core::Action.new scheme='http://schemas.ogf.org/occi/infrastructure/storage/action#', term='backup', title='backup storage'
+    s_backupactioninstance = Occi::Core::ActionInstance.new s_backupaction, nil
+    @one_client.trigger( source_img, s_backupactioninstance )
+    
+    os_backupaction = Occi::Core::Action.new scheme='http://schemas.ogf.org/occi/infrastructure/os_tpl/action#', term='clone', title='clone os_tpl'
+    os_backupactioninstance = Occi::Core::ActionInstance.new os_backupaction, nil
+    @one_client.trigger( source_os_tpl, os_backupactioninstance )
+    
+  end
+  
+
+  
+  
+  #@one_client.trigger( "/mixin/os_tpl/#{}", os_backupactioninstance )
+  
+  s_new_id = get_latest_storage_id() - 2
+  os_new_id = get_latest_os_tpl_id() - 2
+  
+  #s_state = "online"
+  puts "s_new_id:" + s_new_id.inspect
+  puts "os_new_id:" + os_new_id.inspect
+  
+  
+  s_states = [ "offline", "offline", "offline" ]
+  os_states = [ "draft", "draft", "draft" ]
+  #s_states = []
+  
+  
+  os_updateaction = Occi::Core::Action.new scheme='http://schemas.ogf.org/occi/infrastructure/os_tpl/action#', term='update', title='update os_tpl'
+  
+  os_instaction = Occi::Core::Action.new scheme='http://schemas.ogf.org/occi/infrastructure/os_tpl/action#', term='instantiate', title='instantiate os_tpl'
+  os_instactioninstance = Occi::Core::ActionInstance.new os_instaction, nil
+  
+  begin
+    for idx in 0..2 do
+      
+      puts "idx:" + idx.inspect
+      
+      s_id = s_new_id + idx
+      os_id = os_new_id + idx
+      
+      if "offline" == s_state[idx] then
+        s_state[idx] = @one_client.get("/storage/#{s_id}").resources.first.attributes.occi.storage.state
+        puts "/storage/" + s_id.inspect + " state: " + s_states[idx]
+      else
+        if "draft" = os_states[idx] then
+          
+          os_updateactioninstance = Occi::Core::ActionInstance.new os_updateaction, "DISK = [ IMAGE_ID = #{s_id} ]"
+          rc = @one_client.trigger( "/mixin/os_tpl/#{os_id}", os_updateactioninstance )
+          if rc then os_states[idx] = "updated"
+          
+        elsif "updated" == os_states[idx]
+          #updated
+          #go to instantiate
+          rc = @one_client.trigger( "/mixin/os_tpl/#{os_id}", os_instactioninstance )
+          if rc then os_states[idx] = "instantiated"
+          
+        end
+      end
+      
+    end
+    # ?
+  end until [ "instantiated", "instantiated", "instantiated" ] == os_states
+  
+  puts "all os instantiated cloned."
+    
+end
+
 
 
 
 #init_clients()
 init_client( "one" )
-
 #show
 #test()
 #list_ec2()
 #list_one()
-test_one()
+#test_one()
+#get_latest_storage_id
+#puts @one_client.get("/storage/9").resources.first.attributes.occi.storage.state.inspect
+clone_images_os_tpls()
+#get_latest_os_tpl_id.inspect
 
 

@@ -26,11 +26,24 @@ module Backends
           backend_object = storage_trigger_action_prolog(storage_id)
           storage_trigger_action_state_check(backend_object, 'http://schemas.ogf.org/occi/infrastructure/storage/action#backup')
 
-          rc = backend_object.clone("#{backend_object['NAME']}-#{DateTime.now.to_s.gsub(':', '_')}")
+          #rc = backend_object.clone("#{backend_object['NAME']}-#{DateTime.now.to_s.gsub(':', '_')}")
+          rc = backend_object.clone("ubuntu-occi-hd-4G-p")
           check_retval(rc, Backends::Errors::ResourceActionError)
 
           true
         end
+
+
+        def storage_trigger_action_rename(storage_id, attributes = Occi::Core::Attributes.new)
+          backend_object = storage_trigger_action_prolog(storage_id)
+          storage_trigger_action_state_check(backend_object, 'http://schemas.ogf.org/occi/infrastructure/storage/action#rename')
+
+          #rc = backend_object.clone("#{backend_object['NAME']}-#{DateTime.now.to_s.gsub(':', '_')}")
+          check_retval(rc, Backends::Errors::ResourceActionError)
+
+          true
+        end
+        
 
         def storage_trigger_action_prolog(storage_id)
           image = ::OpenNebula::Image.new(::OpenNebula::Image.build_xml(storage_id), @client)

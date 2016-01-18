@@ -244,6 +244,9 @@ module Backends
           storage_trigger_action_offline(storage_id, action_instance.attributes)
         when 'http://schemas.ogf.org/occi/infrastructure/storage/action#backup'
           storage_trigger_action_backup(storage_id, action_instance.attributes)
+
+        when 'http://schemas.ogf.org/occi/infrastructure/storage/action#rename'
+          storage_trigger_action_rename(storage_id, action_instance.attributes)
         else
           fail Backends::Errors::ActionNotImplementedError,
                "Action #{action_instance.action.type_identifier.inspect} is not implemented!"

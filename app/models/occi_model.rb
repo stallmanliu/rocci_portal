@@ -46,17 +46,16 @@ class OcciModel
     # @param backend [Backend] instance of the currently active backend
     # @param with_extensions [true, false] flag allowing backend-specific extensions
     # @return [Occi::Model] an Occi::Model instance ready to use
-    #def model_factory(backend, with_extensions = true)
-    def model_factory(backend, with_extensions = false)
+    def model_factory(backend, with_extensions = true)
       model = Occi::Model.new
       model.register_infrastructure
 
-      #if with_extensions
-      #  Rails.logger.debug "[#{self}] Building OCCI model with extensions"
-      #  model.register_collection(get_extensions(backend))
-      #  model.register_collection(mixins_as_a_coll(backend.os_tpl_list))
-      #  model.register_collection(mixins_as_a_coll(backend.resource_tpl_list))
-      #end
+      if with_extensions
+        Rails.logger.debug "[#{self}] Building OCCI model with extensions"
+        model.register_collection(get_extensions(backend))
+        model.register_collection(mixins_as_a_coll(backend.os_tpl_list))
+        model.register_collection(mixins_as_a_coll(backend.resource_tpl_list))
+      end
 
       model
     end

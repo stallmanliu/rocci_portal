@@ -73,7 +73,9 @@ module Occi
         class_name = term.classify
         if namespace.const_defined? class_name
           klass = namespace.const_get class_name
-          unless klass.ancestors.include? Occi::Core::Entity
+          puts "daniel: self.get_class(), class_name:" + class_name.inspect + ", namespace:" + namespace.inspect + ", kclass:" + klass.inspect + ", klass.ancestors:" +klass.ancestors.inspect
+          #unless klass.ancestors.include? Occi::Core::Entity
+          unless ( klass.ancestors.include?( Occi::Core::Category ) || klass.ancestors.include?( Occi::Core::Entity ) )
             raise "OCCI Kind with type identifier #{scheme + term} could not be created as the corresponding class #{klass.to_s} already exists and is not derived from Occi::Core::Entity"
           end
         else

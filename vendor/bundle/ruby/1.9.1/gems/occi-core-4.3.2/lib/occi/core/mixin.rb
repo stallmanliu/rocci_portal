@@ -3,6 +3,10 @@ module Occi
     class Mixin < Occi::Core::Category
 
       attr_accessor :entities, :depends, :actions, :applies
+      
+      class_attribute :actions, :attributes, :mixin, :kind
+      
+      self.attributes = Occi::Core::Attributes.new
 
       # @param [String] scheme
       # @param [String] term

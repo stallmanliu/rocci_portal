@@ -55,6 +55,7 @@ class OcciModelController < ApplicationController
       
     
     
+=begin
 
 ## get an OCCI::Api::Client::ClientHttp instance
 one_client = Occi::Api::Client::ClientHttp.new({
@@ -103,6 +104,7 @@ ec2_client = Occi::Api::Client::ClientHttp.new({
     ec2_client.get_resource_types.each do |type|
     puts "\n#{type}"
     end
+=end
     
     t = Time.now
     File.open("/opt/rOCCI-server/daniel.log", "a+") { |f| f.puts t.strftime("%H:%M:%S:%L") + " [daniel] occi_model_controller.rb, OcciModelController.show(), leave: " }

@@ -9,7 +9,9 @@
       "title":"OpenNebula specific OS_Template attributes",
       "location":"/mixin/os_tpl/",
 	  "actions":[
-		"http://schemas.ogf.org/occi/infrastructure/os_tpl/action#clone"
+		"http://schemas.ogf.org/occi/infrastructure/os_tpl/action#clone",
+		"http://schemas.ogf.org/occi/infrastructure/os_tpl/action#update",
+		"http://schemas.ogf.org/occi/infrastructure/os_tpl/action#instantiate"
 	  ],
       "attributes":{
         "org":{
@@ -47,7 +49,15 @@
 		"term":"instantiate",
 		"title":"instantiate Operating System Template",
 		"attributes":{
-			
+			"occi":{
+				"infrastructure":{
+					"os_tpl":{
+						"image_id":{
+							"type":"string"
+						}
+					}
+				}
+			}
 		}
 	}
   ]

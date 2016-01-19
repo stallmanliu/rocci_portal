@@ -26,8 +26,8 @@ module Backends
           backend_object = storage_trigger_action_prolog(storage_id)
           storage_trigger_action_state_check(backend_object, 'http://schemas.ogf.org/occi/infrastructure/storage/action#backup')
 
-          #rc = backend_object.clone("#{backend_object['NAME']}-#{DateTime.now.to_s.gsub(':', '_')}")
-          rc = backend_object.clone("ubuntu-occi-hd-4G-p")
+          rc = backend_object.clone("tmp-img-#{DateTime.now.to_s.gsub(':', '_')}")
+          #rc = backend_object.clone("ubuntu-occi-hd-4G-p")
           check_retval(rc, Backends::Errors::ResourceActionError)
 
           true

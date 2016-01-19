@@ -542,6 +542,7 @@ module HTTParty
       options = ModuleInheritableAttributes.hash_deep_dup(default_options).merge(options)
       process_headers(options)
       process_cookies(options)
+      puts "dainel: httparty.rb.perform_request(): http_method:" + http_method.inspect + ", path:" + path.inspect + ", options:" + options.inspect
       Request.new(http_method, path, options).perform(&block)
     end
 

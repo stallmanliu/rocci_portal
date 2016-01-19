@@ -41,6 +41,7 @@ module HTTParty
         connection_adapter: ConnectionAdapter
       }.merge(o)
       self.path = path
+      puts "daniel: httparty::Request.intialize(), http_method:" + self.http_method.inspect + ", self.options:" + self.options.inspect + ", self.path:" + self.path.inspect
       set_basic_auth_from_uri
     end
 
@@ -114,6 +115,7 @@ module HTTParty
       setup_raw_request
       chunked_body = nil
 
+      puts "daniel: go to http.request(), @raw_request:" + @raw_request.inspect
       self.last_response = http.request(@raw_request) do |http_response|
         if block
           chunks = []

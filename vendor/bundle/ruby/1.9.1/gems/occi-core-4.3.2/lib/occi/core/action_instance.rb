@@ -25,11 +25,14 @@ module Occi
         end
         @action = action
 
+        puts "daniel: attributes.kind_of?(Occi::Core::Attributes): " + attributes.kind_of?(Occi::Core::Attributes)
         if attributes.kind_of? Occi::Core::Attributes
           @attributes = attributes.convert
         else
           @attributes = Occi::Core::Attributes.new(attributes || {})
         end
+        puts "daniel: action_instance.rb.initialize(), @attributes:" + @attributes.inspect
+        @attributes
       end
 
       # @param [Hash] options

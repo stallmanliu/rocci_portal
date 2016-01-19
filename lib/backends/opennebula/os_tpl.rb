@@ -49,28 +49,52 @@ module Backends
 
       def os_tpl_trigger_action(os_tpl_id, action_instance)
         
-=begin
+#=begin
         case action_instance.action.type_identifier
-        when 'http://schemas.ogf.org/occi/infrastructure/storage/action#online'
-          storage_trigger_action_online(storage_id, action_instance.attributes)
-        when 'http://schemas.ogf.org/occi/infrastructure/storage/action#offline'
-          storage_trigger_action_offline(storage_id, action_instance.attributes)
-        when 'http://schemas.ogf.org/occi/infrastructure/storage/action#backup'
-          storage_trigger_action_backup(storage_id, action_instance.attributes)
+        when 'http://schemas.ogf.org/occi/infrastructure/os_tpl/action#clone'
+          #storage_trigger_action_online(storage_id, action_instance.attributes)
+        
+          os_tpl = ::OpenNebula::Template.new( ::OpenNebula::Template.build_xml(os_tpl_id), @client )
+          rc = os_tpl.info
+          check_retval(rc, Backends::Errors::ResourceRetrievalError)
+        
+          #clone action
+          ##{DateTime.now.to_s.gsub(':', '_')}
+          #rc = os_tpl.clone( "ubunt-occi-hd-4G-px" )
+          rc = os_tpl.clone( "tmp-os_tpl-#{DateTime.now.to_s.gsub(':', '_')}" )
+          check_retval(rc, Backends::Errors::ResourceActionError)
+          
+        when 'http://schemas.ogf.org/occi/infrastructure/os_tpl/action#update'
+          #storage_trigger_action_offline(storage_id, action_instance.attributes)
+          
+          os_tpl = ::OpenNebula::Template.new( ::OpenNebula::Template.build_xml(os_tpl_id), @client )
+          rc = os_tpl.info
+          check_retval(rc, Backends::Errors::ResourceRetrievalError)
+        
+          #clone action
+          new_img_id = action_instance.attributes.occi.infrastructure.os_tpl.image_id
+          update_xml = " DISK = [ IMAGE_ID = #{new_img_id} ]"
+          rc = os_tpl.update( update_xml, true )
+          puts "daniel: result of os_tpl.update: " + rc.inspect
+          check_retval(rc, Backends::Errors::ResourceActionError)
+          
+        when 'http://schemas.ogf.org/occi/infrastructure/os_tpl/action#instantiate'
+          #storage_trigger_action_backup(storage_id, action_instance.attributes)
+          
+          os_tpl = ::OpenNebula::Template.new( ::OpenNebula::Template.build_xml(os_tpl_id), @client )
+          rc = os_tpl.info
+          check_retval(rc, Backends::Errors::ResourceRetrievalError)
+        
+          #clone action
+          rc = os_tpl.instantiate( "tmp-vm-#{DateTime.now.to_s.gsub(':', '_')}" )
+          check_retval(rc, Backends::Errors::ResourceActionError)
+          
         else
           fail Backends::Errors::ActionNotImplementedError,
                "Action #{action_instance.action.type_identifier.inspect} is not implemented!"
         end
 
-=end
-        
-        os_tpl = ::OpenNebula::Template.new( ::OpenNebula::Template.build_xml(os_tpl_id), @client )
-        rc = os_tpl.info
-        check_retval(rc, Backends::Errors::ResourceRetrievalError)
-        
-        #clone action
-        rc = os_tpl.clone( "#{backend_object['NAME']}-#{DateTime.now.to_s.gsub(':', '_')}" )
-        check_retval(rc, Backends::Errors::ResourceActionError)
+#=end
         
         true
         

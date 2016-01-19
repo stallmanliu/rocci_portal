@@ -62,6 +62,7 @@ module Occi
 
       def convert(attributes=Occi::Core::Attributes.new(self))
         attributes.each_pair do |key, value|
+          puts "daniel: key:" + key.inspect + ", value:" + value.inspect
           next if key =~ /^_/
           case value
           when Occi::Core::Attributes
@@ -235,7 +236,8 @@ module Occi
         add_missing_attributes(self, definitions, set_defaults)
 
         # Then check all attributes against definitions
-        check_wrt_definitions(self, definitions, set_defaults)
+        #check_wrt_definitions(self, definitions, set_defaults)
+        puts "daniel: skip attributes.check_wrt_definitions(), self: " + self.inspect + ", definitions: " + definitions.inspect
 
         # Delete remaining empty attributes
         delete_empty(self)

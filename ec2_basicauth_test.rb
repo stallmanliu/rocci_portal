@@ -627,7 +627,18 @@ def build_sim_env_ec2
 end
 
 def create_vms_ec2
-  for idx in 0..@@vm_num do
+  
+  #backup existing vms
+  #@@cmpt_old = @ec2_client.list("compute").each{ |x| x.split("/").last }
+  cmpt_data = @ec2_client.list("compute")
+  @@cmpt_old = []
+  for i in 0..(cmpt_data.length - 1) do
+    @@cmpt_old[i] = cmpt_data[i].split("/").last
+  end
+  
+  puts "@@cmpt_old:" + @@cmpt_old.inspect
+  
+  for idx in 0..( @@vm_num - 1 ) do
   
   cmpt = @ec2_client.get_resource "compute"
   cmpt.mixins << "http://schemas.ec2.aws.amazon.com/occi/infrastructure/resource_tpl#t2_micro"
@@ -648,11 +659,16 @@ def check_vms_ec2
   puts "cmpt_data:" + cmpt_data.inspect
   
   cmpt_sub = []
+  #cmpt_sub = cmpt_data - @@cmpt_old
   
-  for i in 0..(@@vm_num -1) do
-    cmpt_sub[i] = cmpt_data[cmpt_data.length - @@vm_num + i].split("/").last
-    puts @ec2_client.get("/compute/#{cmpt_sub[i]}").inspect
+#=begin
+  for i in 0..(cmpt_data.length - 1) do
+    cmpt_sub[i] = cmpt_data[i].split("/").last
+    #puts @ec2_client.get("/compute/#{cmpt_sub[i]}").inspect
   end
+#=end
+
+  cmpt_sub = cmpt_sub - @@cmpt_old
   
   puts "cmpt_sub:" + cmpt_sub.inspect
   
@@ -661,9 +677,11 @@ def check_vms_ec2
   
   begin
   
-    for idx in 0..(@@vm_num - 1) do
+    #for idx in 0..(@@vm_num - 1) do
+    for idx in 0..(cmpt_sub.length - 1) do
       c_id = cmpt_sub[idx]
       #c_states[idx] = cmpt_sub[idx].attributes.occi.compute.state
+      puts "go to get /compute/" + c_id.inspect
       c_states[idx] = @ec2_client.get("/compute/#{c_id}").resources.first.attributes.occi.compute.state
       puts "state of vm" + idx.inspect + ":" + c_states[idx].inspect
     end
@@ -753,10 +771,13 @@ init_client( "ec2" )
 #get_latest_storage_id_ec2
 #test_ec2
 #get_latest_storage_id_ec2
-set_vm_num(10)
+set_vm_num( ARGV.first.to_i )
+#set_vm_num(1)
 #check_compute_ec2
 
 #puts @ec2_client.describe("compute").inspect
 
 build_sim_env_ec2()
+
+#puts @ec2_client.get("/compute/i-d03f6463").inspect
 

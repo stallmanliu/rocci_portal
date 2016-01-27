@@ -25,7 +25,7 @@ EC2_ENDPOINT           = 'https://172.90.0.20:11443'
 #daniel
 EC2_USERNAME = 'AKIAJVCAU7L335Q2E4OQ'
 EC2_PASSWORD = '3sJ7xNMiSmiywEaZJDANSzSckbOnorxrvHlrPkko'
-@@vm_num = 20
+@@vm_num = 10
 
 
 OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
@@ -366,12 +366,30 @@ end
 
 def get_latest_compute_id
   prep_conn( "one" )
+  #puts @one_client.list( "compute" ).inspect
+  
+  compute_num = 0
+  begin
+  compute_num = @one_client.list( "compute" ).length
+  puts "compute_num:" + compute_num.inspect
+  sleep 1
+  end until @one_client.list( "compute" ).length == compute_num
+  
   latest_id = @one_client.list( "compute" ).last.split("/").last.to_i
   #puts @one_client.list( "compute" ).inspect
 end
 
 def get_latest_storage_id
   prep_conn( "one" )
+  #puts @one_client.list( "storage" ).inspect
+  
+  storage_num = 0
+  begin
+  storage_num = @one_client.list( "storage" ).length
+  puts "storage_num:" + storage_num.inspect
+  sleep 1
+  end until @one_client.list( "storage" ).length == storage_num
+  
   latest_id = @one_client.list( "storage" ).last.split("/").last.to_i
 end
 
@@ -380,8 +398,16 @@ def get_latest_os_tpl_id
   #latest_id = @one_client.list( "/mixin/os_tpl" ).last.split("/").last.to_i
   #puts @one_client.list( "/mixin/os_tpl/" ).inspect
   #puts @one_client.get_os_templates().inspect
-  #puts @one_client.get( "/mixin/os_tpl" ).inspect
-  #puts @one_client.get_os_tpl_mixins_ary( ).last.split("_").last.to_i.inspect
+  #puts @one_client.get( "/mixin/os_tpl/5" ).inspect
+  #puts @one_client.get_os_tpl_mixins_ary( ).inspect
+  os_tpls_num = 0
+  begin
+  puts @one_client.get_os_tpl_mixins_ary( ).inspect
+  os_tpls_num = @one_client.get_os_tpl_mixins_ary( ).length
+  puts "os_tpls_num:" + os_tpls_num.inspect
+  sleep 2
+  end until @one_client.get_os_tpl_mixins_ary( ).length == os_tpls_num
+  
   #puts @one_client.get_mixin_type_identifiers( ).inspect
   #puts @one_client.list_mixins( "http://schemas.ogf.org/occi/infrastructure/os_tpl" ).inspect
   latest_id = @one_client.get_os_tpl_mixins_ary( ).last.split("_").last.to_i
@@ -390,7 +416,7 @@ end
 #=begin
 def clone_images_os_tpls
   
-  source_img = "/storage/9"
+  source_img = "/storage/227"
   source_os_tpl = "/mixin/os_tpl/5"
   
   #s_new_id = get_latest_storage_id + 1
@@ -405,12 +431,15 @@ def clone_images_os_tpls
     s_backupaction = Occi::Core::Action.new scheme='http://schemas.ogf.org/occi/infrastructure/storage/action#', term='backup', title='backup storage'
     s_backupactioninstance = Occi::Core::ActionInstance.new s_backupaction, nil
     puts source_img + " state:" + @one_client.get( source_img ).resources.first.attributes.occi.storage.state
+    sleep 1
     @one_client.trigger( source_img, s_backupactioninstance )
     #puts "clone + 1, " + source_img + " state:" + @one_client.get( source_img ).resources.first.attributes.occi.storage.state
     
     os_backupaction = Occi::Core::Action.new scheme='http://schemas.ogf.org/occi/infrastructure/os_tpl/action#', term='clone', title='clone os_tpl'
     os_backupactioninstance = Occi::Core::ActionInstance.new os_backupaction, nil
+    #puts source_os_tpl + " state:" + @one_client.get( source_os_tpl ).resources.first.attributes.occi.storage.state
     @one_client.trigger( source_os_tpl, os_backupactioninstance )
+    sleep 1
     
   end
   
@@ -425,6 +454,7 @@ def update_inst_os_tpls
   #@one_client.trigger( "/mixin/os_tpl/#{}", os_backupactioninstance )
   
   s_new_id = get_latest_storage_id() - @@vm_num + 1
+  sleep 10
   os_new_id = get_latest_os_tpl_id() - @@vm_num + 1
   
   #s_state = "online"
@@ -450,19 +480,11 @@ def update_inst_os_tpls
   
   begin
     for idx in 0..(@@vm_num - 1) do
-      
-      #puts s_states[idx].inspect
-      
 #=begin      
       puts "idx:" + idx.inspect
       
       s_id = s_new_id + idx
       os_id = os_new_id + idx
-      
-      if "online" != s_states[idx] then
-        s_states[idx] = @one_client.get("/storage/#{s_id}").resources.first.attributes.occi.storage.state
-        puts "/storage/" + s_id.inspect + " state: " + s_states[idx]
-      else
         
         if "draft" == os_states[idx] then
           
@@ -481,22 +503,22 @@ def update_inst_os_tpls
           puts os_updateactioninstance.inspect
           rc = @one_client.trigger( "/mixin/os_tpl/#{os_id}", os_updateactioninstance )
           if rc then os_states[idx] = "updated" end
+            
+        end
           
-        elsif "updated" == os_states[idx] then
+        if "updated" == os_states[idx] then
           #updated
-          #go to instantiate
-          rc = @one_client.trigger( "/mixin/os_tpl/#{os_id}", os_instactioninstance )
-          if rc then os_states[idx] = "instantiated" end
+          s_states[idx] = @one_client.get("/storage/#{s_id}").resources.first.attributes.occi.storage.state
+          if "online" == s_states[idx] then
+            #go to instantiate
+            rc = @one_client.trigger( "/mixin/os_tpl/#{os_id}", os_instactioninstance )
+            if rc then os_states[idx] = "instantiated" end
+          end
             
           #puts "result of os_tpl instantiate:" + rc.inspect
           
-          
-          
         end
-        
-      end
 #=end
-      
     end
     # ?
     #end until [ "instantiated", "instantiated", "instantiated" ] == os_states
@@ -596,9 +618,49 @@ def build_sim_env
   check_computes
 end
 
+def test_id
+  
+  cmpt_data = @one_client.list("compute")
+  
+  puts "cmpt_data:" + cmpt_data.inspect
+  
+  cmpt_sub = []
+  
+  for i in 0..(@@vm_num -1) do
+    cmpt_sub[i] = cmpt_data[cmpt_data.length - @@vm_num + i].split("/").last
+    puts @one_client.get("/compute/#{cmpt_sub[i]}").inspect
+  end
+  
+  puts "cmpt_sub:" + cmpt_sub.inspect
+  
+end
+
+def test_id_ec2
+  
+  cmpt_data = @ec2_client.list("compute")
+  
+  puts "cmpt_data:" + cmpt_data.inspect
+  
+  cmpt_sub = []
+  
+  for i in 0..(@@vm_num -1) do
+    cmpt_sub[i] = cmpt_data[cmpt_data.length - @@vm_num + i].split("/").last
+    puts @ec2_client.get("/compute/#{cmpt_sub[i]}").inspect
+  end
+  
+  puts "cmpt_sub:" + cmpt_sub.inspect
+  
+end
+
+
+def set_vm_num(num)
+  @@vm_num = num
+end
+
 
 #init_clients()
-init_client( "one" )
+init_client( "ec2" )
+set_vm_num(1)
 #show
 #test()
 #list_ec2()
@@ -607,7 +669,10 @@ init_client( "one" )
 #get_latest_storage_id
 #puts @one_client.get("/storage/9").resources.first.attributes.occi.storage.state.inspect
 #clone_images_os_tpls()
-build_sim_env()
+#build_sim_env()
+#get_latest_os_tpl_id
+#get_latest_compute_id
+#get_latest_storage_id
 #clone_images_os_tpls()
 #reset()
 #get_latest_os_tpl_id()
@@ -616,5 +681,7 @@ build_sim_env()
 #describe_os_tpl()
 #get_latest_os_tpl_id.inspect
 #test_array
+#test_id
+test_id_ec2
 
 

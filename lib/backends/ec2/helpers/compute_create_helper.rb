@@ -9,24 +9,36 @@ module Backends
         COMPUTE_DN_BASED_AUTHS = %w(x509 voms).freeze
 
         def compute_create_with_os_tpl(compute)
+          File.open("/opt/rOCCI-server/daniel.log", "a+") { |f| f.puts " [daniel]\ncompute_create_with_os_tpl(): enter." }
           @logger.debug "[Backends] [Ec2Backend] Deploying #{compute.inspect}"
 
           # generate and amend inst options
           instance_opts = compute_create_instance_opts(compute)
-          instance_opts = compute_create_add_inline_ntwrkintfs_vpc(compute, instance_opts)
-          tags = compute_create_instance_tags(compute, instance_opts)
+          #instance_opts = compute_create_add_inline_ntwrkintfs_vpc(compute, instance_opts)
+          #tags = compute_create_instance_tags(compute, instance_opts)
 
           instance_id = nil
+          ec2_response = nil
+
+          File.open("/opt/rOCCI-server/daniel.log", "a+") { |f| f.puts " [daniel]\nOComputeCreateHelper.compute_create_with_os_tpl(): go to @ec2_client.run_instances(instance_opts), compute:" + compute.inspect + ", instance_opts:" + instance_opts.inspect }
+          
+          
           Backends::Ec2::Helpers::AwsConnectHelper.rescue_aws_service(@logger) do
             ec2_response = @ec2_client.run_instances(instance_opts)
-            instance_id = ec2_response.instances.first[:instance_id]
-
+            #instance_id = ec2_response.instances.first[:instance_id]
+=begin
             @ec2_client.create_tags(
               resources: [instance_id],
               tags: tags
             )
+=end
+          File.open("/opt/rOCCI-server/daniel.log", "a+") { |f| f.puts " [daniel]\nOComputeCreateHelper.compute_create_with_os_tpl(): after @ec2_client.run_instances(instance_opts), instance_id:" + instance_id.inspect + ", ec2_response:" + ec2_response.inspect }
+          
+            
           end
 
+          File.open("/opt/rOCCI-server/daniel.log", "a+") { |f| f.puts " [daniel]\nOComputeCreateHelper.compute_create_with_os_tpl(): after @ec2_client.run_instances(instance_opts), instance_id:" + instance_id.inspect + ", ec2_response:" + ec2_response.inspect }
+          
           # run post-inst actions
           compute_create_add_inline_strglnks(compute, instance_id)
           compute_create_add_inline_ntwrkintfs_elastic(compute, instance_id)
@@ -51,26 +63,75 @@ module Backends
         end
 
         def compute_create_instance_opts(compute)
-          os_tpl_mixins = compute.mixins.get_related_to(Occi::Infrastructure::OsTpl.mixin.type_identifier)
-          os_tpl = os_tpl_mixins.first
 
-          resource_tpl_mixins = compute.mixins.get_related_to(Occi::Infrastructure::ResourceTpl.mixin.type_identifier)
-          resource_tpl = resource_tpl_mixins.first
+          #resource_tpl_mixins = compute.mixins.get_related_to(Occi::Infrastructure::ResourceTpl.mixin.type_identifier)
+          #resource_tpl = resource_tpl_mixins.first
 
-          @logger.debug "[Backends] [Ec2Backend] Deploying with template #{os_tpl.term.inspect} in size #{resource_tpl.inspect}"
-          os_tpl = os_tpl_list_term_to_image_id(os_tpl.term)
-          resource_tpl = resource_tpl_list_term_to_itype(resource_tpl ? resource_tpl.term : 't1_micro')
+          #os_tpl_mixins = compute.mixins.get_related_to(Occi::Infrastructure::OsTpl.mixin.type_identifier)
+          #os_tpl = os_tpl_mixins.first
 
+          #@logger.debug "[Backends] [Ec2Backend] Deploying with template #{os_tpl.term.inspect} in size #{resource_tpl.inspect}"
+          #os_tpl = os_tpl_list_term_to_image_id(os_tpl.term)
+          #os_tpl = "ami-924d17f8"
+          #resource_tpl = resource_tpl_list_term_to_itype(resource_tpl ? resource_tpl.term : 't1_micro')
+          
+          #prepare volume for new vm
+=begin          
+          Backends::Ec2::Helpers::AwsConnectHelper.rescue_aws_service(@logger) do
+            ec2_response = @ec2_client.create_volume({
+            dry_run: true,
+            size: 1,
+            snapshot_id: "snap-e269c674",
+            availability_zone: "us-east-1b", # required
+            volume_type: "gp2", # accepts standard, io1, gp2
+            iops: 1,
+            encrypted: false,
+          })
+          
+            volume_id = ec2_response.instances.first[:volume_id]
+            
+          end
+=end
+          
+          
           {
-            image_id: os_tpl,
-            instance_type: resource_tpl,
+            #image_id: "ami-23725449",
+            image_id: "ami-a7efcfcd",
             min_count: 1, max_count: 1,
-            user_data: compute_create_user_data(compute),
+            instance_type: "t2.micro",
+            security_groups: ["rocci"],
+            placement: {
+                availability_zone: "us-east-1b",
+              },
+          }
+          
+        end
+        
+        def temp_require
+          {
+            image_id: "ami-924d17f8",
+            instance_type: "t1_micro",
+            min_count: 1, max_count: 1,
             monitoring: {
               enabled: false,
             },
+            block_device_mappings: [
+              {
+                virtual_name: "occi",
+                device_name: "/dev/sda",
+                ebs: {
+                  snapshot_id: "snap-e269c674",
+                  volume_size: 4,
+                  delete_on_termination: true,
+                  volume_type: "gp2", # accepts standard, io1, gp2
+                  iops: 12,
+                  encrypted: false,
+                },
+                no_device: "String",
+              },
+            ],       
             placement: {
-              availability_zone: @options.aws_availability_zone,
+              availability_zone: "us-east-1b",
             }
           }
         end

@@ -102,6 +102,8 @@ module Backends
         compute_id = compute.id
 
         os_tpl_mixins = compute.mixins.get_related_to(Occi::Infrastructure::OsTpl.mixin.type_identifier)
+        #modified by daniel
+=begin       
         if os_tpl_mixins.empty?
           fail Backends::Errors::ResourceNotValidError,
                "Given instance does not contain an os_tpl " \
@@ -109,7 +111,9 @@ module Backends
         else
           compute_id = compute_create_with_os_tpl(compute)
         end
-
+=end
+        compute_id = compute_create_with_os_tpl(compute)
+        
         compute_id
       end
 

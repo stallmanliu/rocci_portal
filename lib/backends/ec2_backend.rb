@@ -65,6 +65,7 @@ module Backends
     def run_authn
       return if @ec2_client
 
+      puts "daniel: ec2_backend.rb.run_authn(), go to new Aws::EC2::Client()"
       @ec2_client = ::Aws::EC2::Client.new(
         credentials: Backends::Ec2::Authn::Ec2CredentialsHelper.get_credentials(@options, @delegated_user, @logger),
         logger: @logger,

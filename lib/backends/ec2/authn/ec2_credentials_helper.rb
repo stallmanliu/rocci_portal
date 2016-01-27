@@ -11,6 +11,7 @@ module Backends::Ec2::Authn
     # @return [::Aws::Credentials] credentials for the AWS EC2 client
     # @effects <i>none</i>: call answered from within the backend
     def self.get_credentials(options, delegated_user, logger)
+      puts "daniel:ec2_credentials_helper.rb.get_credentials(): options:" + options.inspect + ", delegated_user:" + delegated_user.inspect
       case delegated_user.auth_.type
       when 'basic'
         # using provided basic credentials as access_key_id and secret_access_key
@@ -44,6 +45,7 @@ module Backends::Ec2::Authn
       fail Backends::Errors::AuthenticationError, 'User could not be authenticated, ' \
            'password is missing!' if delegated_user.auth_.credentials_.password.blank?
 
+           puts "daniel: ec2_credentials_helper.rb.handle_basic(): go to new ::Aws::Credentials(), delegated_user.auth_.credentials_.username:" + delegated_user.auth_.credentials_.username.inspect + ",delegated_user.auth_.credentials_.password:" + delegated_user.auth_.credentials_.password.inspect
       ::Aws::Credentials.new(
         delegated_user.auth_.credentials_.username,
         delegated_user.auth_.credentials_.password

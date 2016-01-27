@@ -68,16 +68,23 @@ module Occi
     # @param set_default_attrs [Boolean] set default attribute values for all entities
     # @return [Boolean] result
     def check(incl_categories = false, set_default_attrs = false)
+      File.open("/opt/rOCCI-server/daniel.log", "a+") { |f| f.puts " [daniel]\ncollection.rb.check(): go to resources.check(). " }
       @resources.check(set_default_attrs)
+      File.open("/opt/rOCCI-server/daniel.log", "a+") { |f| f.puts " [daniel]\ncollection.rb.check(): go to @links.check(). " }
       @links.check(set_default_attrs)
+      File.open("/opt/rOCCI-server/daniel.log", "a+") { |f| f.puts " [daniel]\ncollection.rb.check(): go to @action.check(). " }
       @action.check(set_default_attrs) if @action
 
       if incl_categories
+      File.open("/opt/rOCCI-server/daniel.log", "a+") { |f| f.puts " [daniel]\ncollection.rb.check(): go to @@kinds.check(). " }
         @kinds.check
-        @mixins.check
+      File.open("/opt/rOCCI-server/daniel.log", "a+") { |f| f.puts " [daniel]\ncollection.rb.check(): go to @@kinds.check(). " }
+        #modified by daniel
+        #@mixins.check
         @actions.check
       end
 
+      File.open("/opt/rOCCI-server/daniel.log", "a+") { |f| f.puts " [daniel]\ncollection.rb.check(): go to leave. " }
       true
     end
 

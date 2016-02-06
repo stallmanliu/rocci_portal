@@ -1,7 +1,7 @@
 #!/bin/sh
 
-ONE_NUM=0
-EC2_NUM=15
+ONE_NUM=5
+EC2_NUM=155555
 
 cd /opt/rOCCI-server/
 

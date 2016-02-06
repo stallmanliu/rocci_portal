@@ -614,7 +614,7 @@ end
 
 def create_vms_one
   
-  source_img = "/storage/416"
+  source_img = "/storage/863"
   source_os_tpl = "/mixin/os_tpl/5"
   
   #s_new_id = get_latest_storage_id + 1
@@ -650,7 +650,7 @@ def create_vms_one
     puts "update os_tpl, result:" + rc.inspect
     
     while "online" != @one_client.get("/storage/#{s_id}").resources.first.attributes.occi.storage.state do
-      sleep 1
+      sleep 5
     end
   
     os_instaction = Occi::Core::Action.new scheme='http://schemas.ogf.org/occi/infrastructure/os_tpl/action#', term='instantiate', title='instantiate os_tpl'
@@ -675,7 +675,7 @@ def check_vms_one
   
   for i in 0..(@@vm_num -1) do
     cmpt_sub[i] = cmpt_data[cmpt_data.length - @@vm_num + i].split("/").last
-    puts @one_client.get("/compute/#{cmpt_sub[i]}").inspect
+    #puts @one_client.get("/compute/#{cmpt_sub[i]}").inspect
   end
   
   puts "cmpt_sub:" + cmpt_sub.inspect

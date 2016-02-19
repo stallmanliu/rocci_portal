@@ -8,7 +8,8 @@ ROCCIServer::Application.routes.draw do
   ####################################################
   ## Discovery interface
   ####################################################
-  get '/-/', to: 'occi_model#show', as: 'occi_model'
+  #get '/-/', to: 'occi_model#show', as: 'occi_model'
+  get '/-/', to: 'occi_model#index', as: 'occi_model'
   get '/.well-known/org/ogf/occi/-/', to: 'occi_model#show'
 
   post '/-/', to: 'occi_model#create', as: 'add_mixin'
@@ -116,7 +117,13 @@ ROCCIServer::Application.routes.draw do
   delete '/mixin/*term/', to: 'mixin#delete', as: 'unassign_mixin'
 
   ####################################################
+  ## rocci simulation portal
+  ####################################################
+  get '/overview/', to: 'occi_model#overview'
+
+  ####################################################
   ## Default route
   ####################################################
-  root 'occi_model#index'
+  #root 'occi_model#index'
+  root 'occi_model#welcome'
 end

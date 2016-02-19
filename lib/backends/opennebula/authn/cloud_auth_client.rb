@@ -47,6 +47,10 @@ module Backends::Opennebula::Authn
     # conf a hash with the configuration attributes as symbols
     def initialize(conf)
       @conf   = conf
+      
+      #set for test
+      @conf[:auth] = "basic"
+      
       @lock   = ::Mutex.new
       @token_expiration_time = ::Time.now.to_i + EXPIRE_DELTA
       @upool_expiration_time = 0

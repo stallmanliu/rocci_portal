@@ -23,8 +23,10 @@ EC2_ENDPOINT           = 'https://172.90.0.20:11443'
 #EC2_USERNAME = 'AKIAJFZHTZ44OBT26KSQ'
 #EC2_PASSWORD = 'mhwP6HbIW8EODHD+VUcS6859CShPWmsFK6KqRbVM'
 #daniel
-EC2_USERNAME = 'AKIAJVCAU7L335Q2E4OQ'
-EC2_PASSWORD = '3sJ7xNMiSmiywEaZJDANSzSckbOnorxrvHlrPkko'
+#EC2_USERNAME = 'AKIAJVCAU7L335Q2E4OQ'
+EC2_USERNAME = 'AKIAJ27CLZF7UKE66G7A'
+#EC2_PASSWORD = '3sJ7xNMiSmiywEaZJDANSzSckbOnorxrvHlrPkko'
+EC2_PASSWORD = 'l2a0ng4T53o4NXUdQuyhBnewXPY0udZDMs8Qcncl'
 @@vm_num = 1
 
 
@@ -633,6 +635,7 @@ def create_vms_ec2
   cmpt_data = @ec2_client.list("compute")
   @@cmpt_old = []
   for i in 0..(cmpt_data.length - 1) do
+    puts "@@cmpt_old[" + i.inspect + "]"
     @@cmpt_old[i] = cmpt_data[i].split("/").last
   end
   

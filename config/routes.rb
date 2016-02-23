@@ -120,6 +120,14 @@ ROCCIServer::Application.routes.draw do
   ## rocci simulation portal
   ####################################################
   get '/overview/', to: 'occi_model#overview'
+  
+  get '/new_simulation', to: 'occi_model#new_simulation'
+  post '/new_simulation', to: 'occi_model#new_simulation_submit'
+  
+  get '/management', to: 'occi_model#management'
+  get '/management/user_management', to: 'occi_model#user_management'
+  get '/management/backend_management', to: 'occi_model#backend_management'
+  get '/management/image_management', to: 'occi_model#image_management'
 
   ####################################################
   ## Default route

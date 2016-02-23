@@ -6,6 +6,8 @@ module ActionView
       @view    = context
       @details = extract_details(options)
       template = determine_template(options)
+ 
+      puts "daniel: render(), template:" + template.inspect
 
       prepend_formats(template.formats)
 

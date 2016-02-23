@@ -167,6 +167,7 @@ module ActionController #:nodoc:
     # template.
     #
     def to_html
+      puts "daniel: action_controller/responder.rb to_html() enter"
       default_render
     rescue ActionView::MissingTemplate => e
       navigation_behavior(e)
@@ -174,6 +175,7 @@ module ActionController #:nodoc:
 
     # to_js simply tries to render a template. If no template is found, raises the error.
     def to_js
+      puts "daniel: action_controller/responder.rb to_js() enter"
       default_render
     end
 
@@ -182,6 +184,7 @@ module ActionController #:nodoc:
     # responds to :to_format and display it.
     #
     def to_format
+      puts "daniel: action_controller/responder.rb to_format() enter"
       if get? || !has_errors? || response_overridden?
         default_render
       else
@@ -230,6 +233,9 @@ module ActionController #:nodoc:
     # controller.
     #
     def default_render
+
+      puts "daniel: enter default_render()"
+
       if @default_response
         @default_response.call(options)
       else
@@ -255,6 +261,7 @@ module ActionController #:nodoc:
     #   render xml: @user, status: :created
     #
     def display(resource, given_options={})
+      puts "daniel: enter display()"
       controller.render given_options.merge!(options).merge!(format => resource)
     end
 

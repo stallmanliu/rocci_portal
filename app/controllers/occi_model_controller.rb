@@ -34,6 +34,7 @@ EC2_PASSWORD = 'l2a0ng4T53o4NXUdQuyhBnewXPY0udZDMs8Qcncl'
 @@one_ec2_ratio = 3
 @@vm_num_one = 0
 @@vm_num_ec2 = 0
+@@data_updated = 1
 
 
 OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
@@ -176,6 +177,12 @@ class OcciModelController < ApplicationController
   end
 
   def create_vms_one
+    
+    if nil == @one_client
+      puts "nil @one_client !"
+      init_client( "one" )
+      prep_conn( "one" )
+    end
   
     source_img = "/storage/863"
     source_os_tpl = "/mixin/os_tpl/5"
@@ -262,6 +269,39 @@ class OcciModelController < ApplicationController
     puts "all vm running."
   
   end
+
+  def create_vms_ec2
+    
+    if nil == @ec2_client
+      puts "nil @@ec2_client !"
+      init_client( "ec2" )
+      prep_conn( "ec2" )
+    end
+  
+    #backup existing vms
+    #@@cmpt_old = @ec2_client.list("compute").each{ |x| x.split("/").last }
+    cmpt_data = @ec2_client.list("compute")
+    @@cmpt_old = []
+    for i in 0..(cmpt_data.length - 1) do
+      puts "@@cmpt_old[" + i.inspect + "]"
+      @@cmpt_old[i] = cmpt_data[i].split("/").last
+    end
+  
+    puts "@@cmpt_old:" + @@cmpt_old.inspect
+  
+    for idx in 0..( @@vm_num_ec2 - 1 ) do
+  
+    cmpt = @ec2_client.get_resource "compute"
+    cmpt.mixins << "http://schemas.ec2.aws.amazon.com/occi/infrastructure/resource_tpl#t2_micro"
+    cmpt_loc = @ec2_client.create cmpt
+  
+    #puts "result of create compute:" + cmpt_loc
+  
+    #puts @ec2_client.list "compute"
+    end
+  
+    puts @@vm_num_ec2.inspect + " vms created."
+  end
   
   # DEFAULT
   # GET /
@@ -269,8 +309,97 @@ class OcciModelController < ApplicationController
     #puts "daniel: occi_model#welcome"    
   end
   
+  def overview_db
+    @vms = VirtualMachine.all
+  end
+  
+  def overview_net
+    if nil == @one_client
+      puts "nil @one_client !"
+      init_client( "one" )
+      prep_conn( "one" )
+    end
+    
+    #@computes = @one_client.list( "compute" )
+    #@computes.map! { |c| "#{server_url}/compute/#{c}" }
+    #options = { flag: :links_only }
+
+    if INDEX_LINK_FORMATS.include?(request.format)
+      @computes = @one_client.list( "compute" )
+      #@computes.map! { |c| "#{server_url}/compute/#{c}" }
+      #options = { flag: :links_only }
+    else
+      @computes = Occi::Collection.new
+      @computes.resources = @one_client.describe( "compute" )
+      #update_mixins_in_coll(@computes)
+      #options = {}
+    end
+    
+    if nil == @ec2_client
+      puts "nil @ec2_client !"
+      init_client( "ec2" )
+      prep_conn( "ec2" )
+    end
+
+    if INDEX_LINK_FORMATS.include?(request.format)
+      #@computes ||= @ec2_client.list( "compute" )
+      #@computes.map! { |c| "#{server_url}/compute/#{c}" }
+      #options = { flag: :links_only }
+      puts "@ec2_client.list( compute ):" + @ec2_client.list( "compute" ).inspect
+    else
+      #@computes = Occi::Collection.new
+      @computes.resources.merge @ec2_client.describe( "compute" )
+      #update_mixins_in_coll(@computes)
+      #options = {}
+
+      #puts "@ec2_client.describe( compute ):" + @ec2_client.describe( "compute" ).inspect
+    end
+    
+    vms = VirtualMachine.all
+    add = 1
+    
+    @computes.resources.each do |vm|
+      vms.each do |old_vm|
+        if old_vm.name == vm.id
+          add = 0
+        end
+      end
+      
+      if 1 == add
+        new_vm = VirtualMachine.new
+        new_vm.name = vm.id
+        if nil == vm.title
+          new_vm.backend = "Amazon EC2"
+        else
+          new_vm.backend = "OpenNebula"
+        end
+        new_vm.location = vm.location
+        
+        new_vm.save
+      end
+      add = 1
+    end
+    
+    @@data_updated = 0
+    
+  end
+  
   #GET /overview
   def overview
+    
+    puts "@@data_updated:" + @@data_updated.inspect
+    
+    if 0 == @@data_updated
+      overview_net
+    end
+    
+    #overview_db
+    @vms = VirtualMachine.all
+    
+  end
+  
+  #GET /overview
+  def overview_org
   
     if nil == @one_client
       puts "nil @one_client !"
@@ -342,7 +471,10 @@ class OcciModelController < ApplicationController
     
     deploy( deploy_type, vm_num )
     create_vms_one()
+    create_vms_ec2()
     #check_vms_one()
+    
+    #@@data_updated = 0
     
     
   end
@@ -350,6 +482,41 @@ class OcciModelController < ApplicationController
   def management
     
     puts "daniel: management"
+    
+  end
+  
+  def user_management
+    
+    puts "daniel: user_management"
+    
+    @users = User.all
+    
+  end
+  
+  def user_management_new
+    
+    puts "daniel: user_management_new"
+    
+  end
+  
+  def user_management_new_submit
+    
+    puts "daniel: user_management_new_submit"
+    
+    username = params[:user_name]
+    password = params[:password]
+    
+    puts "username:" + username.inspect + ",password:" + password.inspect
+    
+    puts "Rails.env:" + Rails.env.inspect + ". end"
+    
+    user = User.new
+    user.name = username
+    user.password = password
+    
+    puts "username:" + user.name.inspect + ",password:" + user.password.inspect
+    
+    user.save
     
   end
   

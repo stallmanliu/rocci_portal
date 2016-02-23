@@ -126,6 +126,8 @@ ROCCIServer::Application.routes.draw do
   
   get '/management', to: 'occi_model#management'
   get '/management/user_management', to: 'occi_model#user_management'
+  get '/management/user_management/new', to: 'occi_model#user_management_new'
+  post '/management/user_management/new', to: 'occi_model#user_management_new_submit'
   get '/management/backend_management', to: 'occi_model#backend_management'
   get '/management/image_management', to: 'occi_model#image_management'
 

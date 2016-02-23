@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '~> 4.2.5'
 gem 'rails-api', '~> 0.4.0'
 gem 'responders', '~> 2.1.0'
+gem 'sqlite3'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 #gem 'jbuilder', '~> 2.1.0'
@@ -57,7 +58,8 @@ gem 'rb-inotify', :require => false, :group => :development
 gem 'libnotify', :group => :development
 
 # Use YARD for documentation
-gem 'yard', :group => :development
+#gem 'yard', :group => :development
+gem 'yard'
 gem 'redcarpet', :group => :development
 
 # Use bond+hirb to extend irb

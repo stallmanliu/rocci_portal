@@ -31,16 +31,17 @@ EC2_ENDPOINT           = 'https://172.90.0.20:11443'
 EC2_USERNAME = 'AKIAJ27CLZF7UKE66G7A'
 EC2_PASSWORD = 'l2a0ng4T53o4NXUdQuyhBnewXPY0udZDMs8Qcncl'
 #default deployment: one/ec2 ratio, e.g: 0.5, 0.75, 1.0, 2.0, 5.0
-@@one_ec2_ratio = 3
-@@vm_num_one = 0
-@@vm_num_ec2 = 0
-@@data_updated = 1
 
 
 OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 
 
 class OcciModelController < ApplicationController
+
+  @@one_ec2_ratio = 1
+  @@vm_num_one = 0
+  @@vm_num_ec2 = 0
+  @@data_updated = 0
 
   def init_clients()
     #@one_client = init_client( "one" )
@@ -176,13 +177,27 @@ class OcciModelController < ApplicationController
   
   end
 
+  def get_latest_storage_id_one
+    prep_conn( "one" )
+    #puts @one_client.list( "storage" ).inspect
+  
+    storage_num = 0
+    begin
+    storage_num = @one_client.list( "storage" ).length
+    puts "storage_num:" + storage_num.inspect
+    sleep 1
+    end until @one_client.list( "storage" ).length == storage_num
+  
+    latest_id = @one_client.list( "storage" ).last.split("/").last.to_i
+  end
+
   def create_vms_one
     
     if nil == @one_client
       puts "nil @one_client !"
       init_client( "one" )
-      prep_conn( "one" )
     end
+      prep_conn( "one" )
   
     source_img = "/storage/863"
     source_os_tpl = "/mixin/os_tpl/5"
@@ -210,8 +225,8 @@ class OcciModelController < ApplicationController
       #@one_client.trigger( source_os_tpl, os_backupactioninstance )
   
       os_updateaction = Occi::Core::Action.new scheme='http://schemas.ogf.org/occi/infrastructure/os_tpl/action#', term='update', title='update os_tpl'
-      s_id = get_latest_storage_id
-      puts "get latest_storage_id:" + s_id.inspect
+      s_id = get_latest_storage_id_one
+      puts "get_latest_storage_id_one:" + s_id.inspect
       hash = { :occi => { :infrastructure => { :os_tpl => { :image_id => "#{s_id}" } } } }
       os_updateactioninstance = Occi::Core::ActionInstance.new os_updateaction, hash
       #puts os_updateactioninstance.inspect
@@ -231,7 +246,7 @@ class OcciModelController < ApplicationController
     
     end
   
-    puts "all vm created."
+    puts @@vm_num_one.inspect + " one vm created."
   
   end
 
@@ -275,8 +290,8 @@ class OcciModelController < ApplicationController
     if nil == @ec2_client
       puts "nil @@ec2_client !"
       init_client( "ec2" )
-      prep_conn( "ec2" )
     end
+      prep_conn( "ec2" )
   
     #backup existing vms
     #@@cmpt_old = @ec2_client.list("compute").each{ |x| x.split("/").last }
@@ -300,7 +315,7 @@ class OcciModelController < ApplicationController
     #puts @ec2_client.list "compute"
     end
   
-    puts @@vm_num_ec2.inspect + " vms created."
+    puts @@vm_num_ec2.inspect + " ec2 vms created."
   end
   
   # DEFAULT
@@ -317,8 +332,8 @@ class OcciModelController < ApplicationController
     if nil == @one_client
       puts "nil @one_client !"
       init_client( "one" )
-      prep_conn( "one" )
     end
+      prep_conn( "one" )
     
     #@computes = @one_client.list( "compute" )
     #@computes.map! { |c| "#{server_url}/compute/#{c}" }
@@ -338,8 +353,8 @@ class OcciModelController < ApplicationController
     if nil == @ec2_client
       puts "nil @ec2_client !"
       init_client( "ec2" )
-      prep_conn( "ec2" )
     end
+      prep_conn( "ec2" )
 
     if INDEX_LINK_FORMATS.include?(request.format)
       #@computes ||= @ec2_client.list( "compute" )
@@ -384,14 +399,92 @@ class OcciModelController < ApplicationController
     
   end
   
+  def vms_list_net
+    
+    VirtualMachine.delete_all()
+    
+    if nil == @one_client
+      puts "nil @one_client !"
+      init_client( "one" )
+    end
+    prep_conn( "one" )
+    
+    #@computes = @one_client.list( "compute" )
+    #@computes.map! { |c| "#{server_url}/compute/#{c}" }
+    #options = { flag: :links_only }
+    
+    #vms: array#
+    @vms = @one_client.list( "compute" )
+    
+    puts "get vms_list:" + @vms.inspect
+  
+    @vms.each do |vm|
+      puts "insert one vm to db:" + vm.inspect
+      new_vm = VirtualMachine.new
+      new_vm.name = vm.split("/").last
+      new_vm.backend = "OpenNebula"
+      new_vm.location = vm
+      
+      new_vm.save
+    end
+    
+    
+    #@vms.each do |vm|
+    #  if !VirtualMachine.exists?( name: vm.split("/").last )
+    #    puts "insert one vm to db:" + vm.inspect
+    #    new_vm = VirtualMachine.new
+    #    new_vm.name = vm.split("/").last
+    #    new_vm.backend = "OpenNebula"
+    #    new_vm.location = vm
+    #    
+    #    new_vm.save
+    #  end
+    #end
+
+    
+    if nil == @ec2_client
+      puts "nil @ec2_client !"
+      init_client( "ec2" )
+    end
+      prep_conn( "ec2" )
+    
+    @vms = @ec2_client.list( "compute" )
+    
+    @vms.each do |vm|
+      new_vm = VirtualMachine.new
+      new_vm.name = vm.split("/").last
+      new_vm.backend = "Amazone EC2"
+      new_vm.location = vm
+      
+      new_vm.save
+    end
+    
+    #@vms.each do |vm|
+    #  if !VirtualMachine.exists?( name: vm.split("/").last )
+    #    new_vm = VirtualMachine.new
+    #    new_vm.name = vm.split("/").last
+    #    new_vm.backend = "Amazone EC2"
+    #    new_vm.location = vm
+    #    
+    #    new_vm.save
+    #  end
+    #end
+    
+    #@@data_updated = 1
+    puts "vms data updated into db"
+    
+  end
+  
   #GET /overview
   def overview
     
-    puts "@@data_updated:" + @@data_updated.inspect
+    #puts "@@data_updated:" + @@data_updated.inspect
     
-    if 0 == @@data_updated
-      overview_net
-    end
+    #if 0 == @@data_updated
+    #  vms_list_net
+    #end
+    
+    vms_list_net()
     
     #overview_db
     @vms = VirtualMachine.all
@@ -404,8 +497,8 @@ class OcciModelController < ApplicationController
     if nil == @one_client
       puts "nil @one_client !"
       init_client( "one" )
-      prep_conn( "one" )
     end
+      prep_conn( "one" )
     
     #@computes = @one_client.list( "compute" )
     #@computes.map! { |c| "#{server_url}/compute/#{c}" }
@@ -425,8 +518,8 @@ class OcciModelController < ApplicationController
     if nil == @ec2_client
       puts "nil @ec2_client !"
       init_client( "ec2" )
-      prep_conn( "ec2" )
     end
+      prep_conn( "ec2" )
 
     if INDEX_LINK_FORMATS.include?(request.format)
       #@computes ||= @ec2_client.list( "compute" )
@@ -476,6 +569,10 @@ class OcciModelController < ApplicationController
     
     #@@data_updated = 0
     
+    #update new vms to db
+    #vms_list_net()
+    
+    puts "daniel: new_simulation_submit finish"
     
   end
   

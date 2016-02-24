@@ -25,7 +25,7 @@ module Occi
         end
         @action = action
 
-        puts "daniel: attributes.kind_of?(Occi::Core::Attributes): " + attributes.kind_of?(Occi::Core::Attributes)
+        puts "daniel: attributes.kind_of?(Occi::Core::Attributes): " + attributes.kind_of?(Occi::Core::Attributes).inspect
         if attributes.kind_of? Occi::Core::Attributes
           @attributes = attributes.convert
         else

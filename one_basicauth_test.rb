@@ -615,9 +615,11 @@ end
 def create_vms_one
   
   #source_img = "/storage/863"
-  source_img = "/storage/952"
+  #source_img = "/storage/952"
+  source_img = "/storage/943"
   #source_os_tpl = "/mixin/os_tpl/5"
-  source_os_tpl = "/mixin/os_tpl/216"
+#  source_os_tpl = "/mixin/os_tpl/216"
+  source_os_tpl = "/mixin/os_tpl/217"
   
   #s_new_id = get_latest_storage_id + 1
   #os_new_id = get_latest_os_tpl_id + 1
